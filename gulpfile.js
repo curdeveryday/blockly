@@ -42,6 +42,8 @@ var argv = require('yargs').argv;
 
 const upstream_url = "https://github.com/google/blockly.git";
 
+const outputDir = path.join(__dirname, 'output');
+
 ////////////////////////////////////////////////////////////
 //                        Build                           //
 ////////////////////////////////////////////////////////////
@@ -204,7 +206,7 @@ gulp.task('build-compressed', function (cb) {
     .pipe(compile({
       dependency_mode: 'PRUNE',
       entry_point: './core-requires.js',
-      js_output_file: 'blockly_compressed.js',
+      js_output_file: path.join(outputDir, 'blockly_compressed.js'),
       externs: ['./externs/svg-externs.js', './externs/goog-externs.js'],
       define: defines,
       language_in:
@@ -245,7 +247,7 @@ goog.provide('Blockly.Warning');`;
     .pipe(compile({
       dependency_mode: 'NONE',
       externs: ['./externs/goog-externs.js'],
-      js_output_file: 'blocks_compressed.js'
+      js_output_file: path.join(outputDir, 'blocks_compressed.js')
     }, argv.verbose, argv.strict))
     .pipe(gulp.replace('\'use strict\';', '\'use strict\';\n\n\n'))
     // Remove Blockly.Blocks to be compatible with Blockly.
@@ -276,7 +278,7 @@ goog.provide('Blockly.utils.string');`;
     .pipe(compile({
       dependency_mode: 'NONE',
       externs: ['./externs/goog-externs.js'],
-      js_output_file: `${language}_compressed.js`
+      js_output_file: path.join(outputDir, `${language}_compressed.js`)
     }, argv.verbose, argv.strict))
     .pipe(gulp.replace('\'use strict\';', '\'use strict\';\n\n\n'))
     // Remove Blockly.Generator and Blockly.utils.string to be compatible with Blockly.
