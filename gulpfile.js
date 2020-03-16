@@ -28,6 +28,7 @@ gulp.rename = require('gulp-rename');
 gulp.insert = require('gulp-insert');
 gulp.umd = require('gulp-umd');
 
+var os = require('os');
 var path = require('path');
 var fs = require('fs');
 var rimraf = require('rimraf');
@@ -194,7 +195,8 @@ gulp.task('build-compressed', function (cb) {
     // Flatten all files so they're in the same directory, but ensure that
     // files with the same name don't conflict.
     .pipe(gulp.rename(function (p) {
-      var dirname = p.dirname.replace(new RegExp(path.sep, "g"), "-");
+      var sep = os.platform() == 'win32' ? '/' : path.sep;
+      var dirname = p.dirname.replace(new RegExp(sep, "g"), "-");
       p.dirname = "";
       p.basename = dirname + "-" + p.basename;
     }))
