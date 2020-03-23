@@ -183,7 +183,6 @@ Blockly.Generator.prototype.blockToCode = function(block, opt_thisOnly) {
     // Skip past this block if it is disabled.
     return opt_thisOnly ? '' : this.blockToCode(block.getNextBlock());
   }
-
   var func = this[block.type];
   if (typeof func != 'function') {
     throw Error('Language "' + this.name_ + '" does not know how to generate ' +
@@ -196,10 +195,11 @@ Blockly.Generator.prototype.blockToCode = function(block, opt_thisOnly) {
   var code = func.call(block, block);
   if (Array.isArray(code)) {
     // Value blocks return tuples of code and operator order.
-    if (!block.outputConnection) {
-      throw TypeError('Expecting string from statement block: ' + block.type);
-    }
-    return [this.scrub_(block, code[0], opt_thisOnly), code[1]];
+    // if (!block.outputConnection) {
+    //   throw TypeError('Expecting string from statement block: ' + block.type);
+    // }
+    // return [this.scrub_(block, code[0], opt_thisOnly), code[1]];
+    return code;
   } else if (typeof code == 'string') {
     if (this.STATEMENT_PREFIX && !block.suppressPrefixSuffix) {
       code = this.injectId(this.STATEMENT_PREFIX, block) + code;

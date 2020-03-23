@@ -390,6 +390,45 @@ Blockly.Variables.renameVariable = function(workspace, variable,
  *     variable name, or null if the user picked something illegal.
  */
 Blockly.Variables.promptName = function(promptText, defaultText, callback) {
+  if(window.swal) {
+    swal('Do you want to create variables?', {
+      content: {
+        element: "input",
+        attributes: {
+          placeholder: Blockly.Msg.NEW_VARIABLE_TITLE,
+          type: "text",
+        },
+      },
+      buttons: [true, 'Ok']
+    })
+    .then(function(c) {
+      if(c) {
+        c = c.replace(/(\s*)/g,"");
+        var arr = window['Blockly'].M5Component || [];
+        for (var i = 0; i < arr.length; i++) {
+          var component = arr[i];
+          if(c == component.name){
+              swal('error', 'Your name and component name repeat!', 'error');
+              return;
+          }
+        }
+
+        var varlist = window['BlocklyEditor'].getAllVariables();
+        for (var i = 0; i < varlist.length; i++) {
+          var variable = varlist[i];
+          if(c == variable.name){
+            swal("error", "Your variable name repeats!", "error");
+            return;
+          }
+        }
+
+        callback(c);
+        return;
+      }
+      callback(null);
+    });
+    return;
+  }
   Blockly.prompt(promptText, defaultText, function(newVar) {
     // Merge runs of whitespace.  Strip leading and trailing whitespace.
     // Beyond this, all names are legal.

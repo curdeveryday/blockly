@@ -73,6 +73,8 @@ goog.require('Blockly.FieldTextInput');
 goog.require('Blockly.FieldMultilineInput');
 goog.require('Blockly.FieldNumber');
 goog.require('Blockly.FieldVariable');
+goog.require('Blockly.FieldColourMatrix');
+goog.require('Blockly.FieldColourPicker');
 
 // If you'd like to include the date field in your build, you will also need to
 // include the closure library as a build dependency.  You can do so by running:
@@ -95,8 +97,10 @@ goog.require('Blockly.zelos.Renderer');
 // Blockly Themes.
 // Classic is the default theme.
 goog.require('Blockly.Themes.Classic');
-goog.require('Blockly.Themes.Dark');
-goog.require('Blockly.Themes.Deuteranopia');
-goog.require('Blockly.Themes.HighContrast');
-goog.require('Blockly.Themes.Tritanopia');
+goog.require('Blockly.Themes.M5Stack');
+// goog.require('Blockly.Themes.Dark');
+// goog.require('Blockly.Themes.Deuteranopia');
+// goog.require('Blockly.Themes.HighContrast');
+// goog.require('Blockly.Themes.Tritanopia');
 // goog.require('Blockly.Themes.Modern');
+// goog.require('Blockly.Themes.Zelos');

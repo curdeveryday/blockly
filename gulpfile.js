@@ -336,11 +336,7 @@ gulp.task('build-dart', function() {
  *     dart_compressed.js
  */
 gulp.task('build-generators', gulp.parallel(
-  'build-javascript',
-  'build-python',
-  'build-php',
-  'build-lua',
-  'build-dart'
+  'build-python'
 ));
 
 /**
@@ -459,8 +455,7 @@ gulp.task('build-langfiles', function(done) {
  */
 gulp.task('build-core', gulp.parallel(
   'build-compressed',
-  'build-blocks',
-  'build-uncompressed'
+  'build-blocks'
 ));
 
 /**
