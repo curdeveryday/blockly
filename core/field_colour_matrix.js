@@ -41,9 +41,9 @@ Blockly.FieldColourMatrix = function (opt_value, opt_validator, opt_config) {
 
     this.size_ = new Blockly.utils.Size(185, 180);
 
-    this.matrix_  = Array.from({ length: 5 }, function(line){
+    this.matrix_ = Array.from({ length: 5 }, function(line){
         return Array.from({ length: 5 }, function(row) {
-            return 0;
+            return '#000000';
         });
     });
 
@@ -202,7 +202,7 @@ Blockly.FieldColourMatrix.prototype.createView_ = function () {
                     'y': 22 * line,
                     'width': 20,
                     'height': 20,
-                    'fill': this.DEFAULT_COLOR,
+                    'fill': this.matrix_[line][row],
                     'data-x': line,
                     'data-y': row
                 }, this.matrixGroup_);
@@ -232,6 +232,24 @@ Blockly.FieldColourMatrix.prototype.setFillColor = function(color) {
 
 Blockly.FieldColourMatrix.prototype.getFillColor = function() {
     return this.fillColor_;
+}
+
+Blockly.FieldColourMatrix.prototype.toXml = function(el) {
+    el.setAttribute('matrix', this.matrix_.toString());
+    return el;
+}
+
+Blockly.FieldColourMatrix.prototype.fromXml = function(el) {
+    var matrixStr = el.getAttribute('matrix');
+    if(matrixStr) {
+        var matrixArr = matrixStr.split(',');
+        for(var line = 0; line < 5; line++) {
+            for(var row = 0; row < 5; row++) {
+                this.matrix_[line][row] = matrixArr[line * 5 + row];
+            }
+        }
+        this.setValue(matrixStr);
+    }
 }
 
 Blockly.fieldRegistry.register('field_colour_matrix', Blockly.FieldColourMatrix);
