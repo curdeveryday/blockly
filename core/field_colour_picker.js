@@ -78,7 +78,6 @@ Blockly.FieldColourPicker.prototype.onMouseDown = function (event) {
     colorInput.type = 'color';
     colorInput.onchange = function (_ev) {
         _this.setValue(_ev.target.value);
-        console.log(_this);
         colorInput = null;
     }
     colorInput.click();

@@ -197,8 +197,8 @@ Blockly.Python.finish = function(code) {
     }
   }
   // Clean up temporary data.
-  delete Blockly.Python.definitions_;
-  delete Blockly.Python.functionNames_;
+  // delete Blockly.Python.definitions_;
+  // delete Blockly.Python.functionNames_;
   Blockly.Python.variableDB_.reset();
   var allDefs = imports.join('\n') + '\n\n' + definitions.join('\n\n');
   return allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n') + code;
