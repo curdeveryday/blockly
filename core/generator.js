@@ -250,6 +250,7 @@ Blockly.Generator.prototype.valueToCode = function(block, name, outerOrder) {
         targetBlock.type);
   }
   if (!code) {
+    if(code === 0) return '0';
     return '';
   }
 
