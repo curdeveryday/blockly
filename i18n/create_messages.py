@@ -136,7 +136,7 @@ def main():
             value = source_defs[key]
             comment = '  // untranslated'
           value = value.replace('"', '\\"')
-          outfile.write(u'Blockly.Msg["{0}"] = "{1}";{2}\n'
+          outfile.write(u'Blockly.Msg["{0}"] = "{1}";{2}\r\n'
               .format(key, value, comment))
 
         # Announce any keys defined only for target language.
