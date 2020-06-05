@@ -506,14 +506,15 @@ Blockly.FieldDropdown.prototype.doClassValidation_ = function(opt_newValue) {
       break;
     }
   }
-  if (!isValueValid) {
-    if (this.sourceBlock_) {
-      console.warn('Cannot set the dropdown\'s value to an unavailable option.' +
-        ' Block type: ' + this.sourceBlock_.type + ', Field name: ' + this.name +
-        ', Value: ' + opt_newValue);
-    }
-    return null;
-  }
+  // Fix load m5f file some blocks can not set downdrop list
+  // if (!isValueValid) {
+  //   if (this.sourceBlock_) {
+  //     console.warn('Cannot set the dropdown\'s value to an unavailable option.' +
+  //       ' Block type: ' + this.sourceBlock_.type + ', Field name: ' + this.name +
+  //       ', Value: ' + opt_newValue);
+  //   }
+  //   return null;
+  // }
   return /** @type {string} */ (opt_newValue);
 };
 
